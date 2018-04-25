@@ -1,0 +1,27 @@
+--1.Create a tablespace named "mid_term" with one datafile, 
+--the datafile should have your first_name_last_name (example: andres_martinez) and the size of the datafile is 35Mb.
+
+CREATE TABLESPACE mid_term DATAFILE 
+'C:\Users\salak406\Pictures\cristian_david.DBF' SIZE 35M;
+
+--2.Create a profile named "exam" with 1 failed attempts of login and 15 minutes of idle time.
+
+-- exam
+CREATE PROFILE exam LIMIT
+PASSWORD_LIFE_TIME              40
+SESSIONS_PER_USER               1
+IDLE_TIME                       15
+FAILED_LOGIN_ATTEMPTS           1;
+
+--3.Create a user named "ejercicios" with unlimited space in the tablespace, associated to the exam profile.
+
+CREATE USER ejercicios
+IDENTIFIED BY ejercicios
+DEFAULT TABLESPACE mid_term
+QUOTA unlimited on mid_term
+PROFILE exam;
+
+--4.With the user "ejercicios" create the tables proposed in the model and import the data.
+
+GRANT DBA TO ejercicios;
+GRANT CREATE SESSION TO ejercicios;
